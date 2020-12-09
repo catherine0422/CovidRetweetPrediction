@@ -1,0 +1,216 @@
+---
+title: "features_analyse"
+author: "Yujia Fu"
+date: "2020/12/9"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Analyse the extracted features
+
+### Package requirements
+
+```{r packages, message = FALSE, warning = FALSE}
+library(tidyverse)    # advanced data manipulation and vizualisation
+library(knitr)        # R notebook export and formatting 
+library(ggplot2)        
+library(kableExtra)   # integration of table in Rmarkdown
+library(cowplot)
+```
+
+### load data
+
+```{r, message = FALSE, warning = FALSE}
+data <- read_csv('../data/train_transformed_sample.csv')
+
+data %>% head() %>% 
+  kable() %>% 
+  kable_styling() %>%
+  scroll_box(width = "100%")
+```
+
+
+```{r}
+n_sample = 500
+p1 <- data %>% sample_n(n_sample) %>% 
+  filter(!user_statuses_count==0,!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = user_statuses_count, y =retweet_count)) +
+  scale_x_log10() +
+  scale_y_log10()
+
+p1
+```
+```{r}
+p4 <-data %>% sample_n(n_sample) %>% 
+  filter(!user_followers_count==0,!retweet_count==0) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = user_followers_count, y =retweet_count)) +
+  scale_x_log10() +
+  scale_y_log10()
+
+p4
+```
+
+```{r}
+p2 <- data %>% sample_n(n_sample) %>% 
+  filter(!user_friends_count==0,!retweet_count==0) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = user_friends_count, y =retweet_count)) +
+  scale_x_log10() +
+  scale_y_log10()
+
+p2
+```
+
+```{r}
+p3 <- data %>% sample_n(n_sample) %>% 
+  filter(!ratio_friends_followers==0,!retweet_count==0) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = ratio_friends_followers, y =retweet_count)) +
+  scale_x_log10() +
+  scale_y_log10()
+
+p3
+```
+
+
+```{r}
+plot_grid(p1,p2,p4,p3,nrow = 2, ncol = 2)
+```
+
+
+```{r}
+data$mention_count = as_factor(data$mention_count)
+
+p4 <- data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = mention_count, y = retweet_count)) +
+  scale_y_log10()
+
+p4
+```
+
+```{r}
+data$url_count = as_factor(data$url_count)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = url_count, y = retweet_count)) +
+  scale_y_log10()
+```
+
+
+```{r}
+data$hashtag_count = as_factor(data$hashtag_count)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = hashtag_count, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data$mention_exist = as_factor(data$mention_exist)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = mention_exist, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data$url_exist = as_factor(data$url_exist)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = url_exist, y = retweet_count)) +
+  scale_y_log10()
+```
+```{r}
+data$hashtag_exist = as_factor(data$hashtag_exist)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = hashtag_exist, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data$timeseg = as_factor(data$timeseg)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = timeseg, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data$day_of_week = as_factor(data$day_of_week)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = day_of_week, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data$weekend = as_factor(data$weekend)
+
+data %>% filter(!retweet_count == 0) %>% 
+  ggplot() +
+  geom_boxplot(mapping = aes(x = weekend, y = retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data %>% 
+  filter(!text_length==0,!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = text_length, y =retweet_count)) +
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+```{r}
+data %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = sentiment_pos, y =retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = sentiment_neg, y =retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = sentiment_neu, y =retweet_count)) +
+  scale_y_log10()
+```
+```{r}
+data %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = sentiment_comp, y =retweet_count)) +
+  scale_y_log10()
+```
+
+```{r}
+data %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = tf_idf_0, y =retweet_count)) +
+  scale_y_log10()
+```
+
