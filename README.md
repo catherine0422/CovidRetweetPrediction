@@ -24,29 +24,33 @@ All the files used are under `code` repository.
 
 We experimented 3 basic models and 4 enhanced models, each with a jupyter notebook file to that you can run. The origin file is use some default arguments of each model (to keep consistency to make a comparison between different models), to get the best predicting result of each model, please modify some arguments as explained follow.
 
-### SVM (LinearSVR.ipynb)
+### SVM (regressor_linearSVR.ipynb)
 
-1. Load data
+You should put your data in the `data` repository. This file uses the data after features extraction so the name should be `evaluation_transformed.csv` and `train_transformed.csv`. 
+You could select features for training by modifying `features_selected` and for normalization by modifying `features_need_scaled` in the 1st part of code. 
+You could choose model's parameters (`n_estimators` and `max_depth`) in the first part of code. 
+The prediction on `evaluation_transformed.csv` will be writed into `prediction` repository. This guide works also for GBR, RF, RF after logarithmization and GBR after logarithmization. 
 
-  - Here we can choose the features that we want to train, also the features that we want to normalize.
+### GBR (regressor_gradient_boosting.ipynb)
 
-2. Cross validation for train and data
+Parameters settings : n_estimators = 100, max_depth = 18.
 
-  - We define the model, then run the function 'cv' on the training data with selected features and normalized features. Then we get the MAE score after cross validation. 
-  
-3. Predict for evaluation
+### RF (regressor_random_forest.ipynb)
 
-  - We train the model on all the data, and predict on evaluation.csv, then we write the result into a csv file. To do this, you should have a repository named 'prediction'.
+Parameters settings : n_estimators = 100, max_depth = 18.
 
-### GBR
+### RF after logarithmization (regressor_log_ random forest.ipynb)
 
-### RF
+Parameters settings : n_estimators = 500, max_depth = 18. (This corresponds to our best MAE score)
 
-### RF after logarithmization
+### GBR after logarithmization (regressor_log_gradient_boosting_regressor.ipynb)
 
-### GBR after logarithmization
+Parameters settings : n_estimators = 100, max_depth = 18.
 
-### SVM-enhanced RF
+### SVM-enhanced RF (SVR enhanced Random forest.ipynb)
 
-### RF-enhanced SVM
+Parameters settings : n_estimators = 100, max_depth = 18.
 
+### RF-enhanced SVM (Random forest enhanced SVR.ipynb)
+
+Parameters settings : n_estimators = 100, max_depth = 18.
