@@ -24,7 +24,19 @@ All the files used are under `code` repository.
 
 We experimented 3 basic models and 4 enhanced models, each with a jupyter notebook file to that you can run. The origin file is use some default arguments of each model (to keep consistency to make a comparison between different models), to get the best predicting result of each model, please modify some arguments as explained follow.
 
-### SVM
+### SVM (LinearSVR.ipynb)
+
+1. Load data
+
+  - Here we can choose the features that we want to train, also the features that we want to normalize.
+
+2. Cross validation for train and data
+
+  - We define the model, then run the function 'cv' on the training data with selected features and normalized features. Then we get the MAE score after cross validation. 
+  
+3. Predict for evaluation
+
+  - We train the model on all the data, and predict on evaluation.csv, then we write the result into a csv file. To do this, you should have a repository named 'prediction'.
 
 ### GBR
 
