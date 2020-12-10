@@ -13,7 +13,7 @@ First we need to do features extraction from the origin data.
 
 Use the file `features_extraction.ipynb` which is under the `code` repository. Run all the cells. The data with extracted features will be saved under the `data` repository on the names: `evaluation_transformed.csv` and `train_transformed.csv`.
 
-##Features analyses
+### Features analyses
 
 All the files used are under `code` repository.
 
