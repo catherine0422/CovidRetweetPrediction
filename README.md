@@ -51,7 +51,7 @@ Parameters settings : n_estimators = 100, max_depth = 18.
 
 Parameters settings : n_estimators = 100, max_depth = 18.
 
-### RF after logarithmization (regressor_log_ random forest.ipynb)
+### RF after logarithmization (regressor_log_ randomforest.ipynb)
 
 Parameters settings : n_estimators = 500, max_depth = 18. (This corresponds to our best MAE score)
 
@@ -59,10 +59,10 @@ Parameters settings : n_estimators = 500, max_depth = 18. (This corresponds to o
 
 Parameters settings : n_estimators = 100, max_depth = 18.
 
-### SVM-enhanced RF (SVR enhanced Random forest.ipynb)
+### SVM-enhanced RF (regressor_svr_enhanced_random_forest.ipynb)
 
 Parameters settings : n_estimators = 100, max_depth = 18.
 
-### RF-enhanced SVM (Random forest enhanced SVR.ipynb)
+### RF-enhanced SVM (regressor_random_forest_enhanced_svr.ipynb)
 
 Parameters settings : n_estimators = 100, max_depth = 18.
