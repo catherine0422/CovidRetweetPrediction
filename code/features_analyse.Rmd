@@ -99,7 +99,15 @@ p_neu <- data  %>%
   scale_y_log10()+
   labs(x = 'neutral sentiment score', y = 'retweet count')
 
-plot_grid(p_pos,p_neg,p_neu,nrow = 2, ncol = 2)
+# smooth line of compound sentiment score and retweet count
+p_comp <- data  %>% 
+  filter(!retweet_count==0) %>% 
+  ggplot() +
+  geom_smooth(mapping = aes(x = sentiment_comp, y =retweet_count)) +
+  scale_y_log10()+
+  labs(x = 'compound sentiment score', y = 'retweet count')
+
+plot_grid(p_pos,p_neg,p_neu,p_comp,nrow = 2, ncol = 2)
 ```
 
 ### Distribution of retweet count group by whether it's posted on weekend
