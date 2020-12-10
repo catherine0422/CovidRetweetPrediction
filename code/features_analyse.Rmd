@@ -33,95 +33,76 @@ data %>% head() %>%
 ```
 
 
-```{r}
+### Relatioship between retweet count and four user features
 
-p1 <- data %>%  
+```{r}
+# smooth line of user statuses and retweet count
+p_statuses <- data %>%  
   filter(!user_statuses_count==0,!retweet_count==0) %>% 
   ggplot() +
   geom_smooth(mapping = aes(x = user_statuses_count, y =retweet_count),method = lm) +
   scale_x_log10() +
   scale_y_log10()
 
-```
-```{r}
-p4 <-data %>% 
-  filter(!user_followers_count==0,!retweet_count==0) %>%
-  ggplot() +
-  geom_smooth(mapping = aes(x = user_followers_count, y =retweet_count),method = lm) +
-  scale_x_log10() +
-  scale_y_log10()
-
-```
-
-```{r}
-p2 <- data %>% 
+# smooth line of user friends and retweet count
+p_friends <- data %>% 
   filter(!user_friends_count==0,!retweet_count==0) %>%
   ggplot() +
   geom_smooth(mapping = aes(x = user_friends_count, y =retweet_count),method = lm) +
   scale_x_log10() +
   scale_y_log10()
 
-```
+p_followers <-data %>% 
+  filter(!user_followers_count==0,!retweet_count==0) %>%
+  ggplot() +
+  geom_smooth(mapping = aes(x = user_followers_count, y =retweet_count),method = lm) +
+  scale_x_log10() +
+  scale_y_log10()
 
-```{r}
-p3 <- data %>% 
+
+# smooth line of user followers and retweet count
+p_ratio <- data %>% 
   filter(!ratio_friends_followers==0,!retweet_count==0) %>%
   ggplot() +
   geom_smooth(mapping = aes(x = ratio_friends_followers, y =retweet_count),method = lm) +
   scale_x_log10() +
   scale_y_log10()
 
+plot_grid(p_statuses,p_followers,p_friends,p_ratio,nrow = 2, ncol = 2)
+
 ```
 
+### Relatioship between retweet count and sentiment scores
 
 ```{r}
-plot_grid(p1,p2,p4,p3,nrow = 2, ncol = 2)
-```
-
-
-
-
-```{r}
-data %>% 
-  filter(!text_length==0,!retweet_count==0) %>% 
-  ggplot() +
-  geom_smooth(mapping = aes(x = text_length, y =retweet_count),method = lm) +
-  scale_x_log10() +
-  scale_y_log10()
-```
-
-```{r}
+# smooth line of positive sentiment score and retweet count
 p_pos <- data  %>% 
   filter(!retweet_count==0) %>% 
   ggplot() +
   geom_smooth(mapping = aes(x = sentiment_pos, y =retweet_count),method = lm) +
   scale_y_log10() +
   labs(x = 'positive sentiment score', y = 'retweet count')
-```
 
-```{r}
+# smooth line of negative sentiment score and retweet count
 p_neg <- data %>% 
   filter(!retweet_count==0) %>% 
   ggplot() +
   geom_smooth(mapping = aes(x = sentiment_neg, y =retweet_count),method = lm) +
   scale_y_log10()+
   labs(x = 'negative sentiment score', y = 'retweet count')
-```
 
-```{r}
+# smooth line of neutral sentiment score and retweet count
 p_neu <- data  %>% 
   filter(!retweet_count==0) %>% 
   ggplot() +
   geom_smooth(mapping = aes(x = sentiment_neu, y =retweet_count),method = lm) +
   scale_y_log10()+
   labs(x = 'neutral sentiment score', y = 'retweet count')
-```
 
-
-
-```{r}
 plot_grid(p_pos,p_neg,p_neu,nrow = 2, ncol = 2)
 ```
+
+### Distribution of retweet count group by whether it's posted on weekend
 
 ```{r}
 data$weekend = as_factor(data$weekend)
