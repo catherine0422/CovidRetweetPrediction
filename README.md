@@ -27,6 +27,7 @@ We experimented 3 basic models and 4 enhanced models, each with a jupyter notebo
 ### SVM (regressor_linearSVR.ipynb)
 
 You should put your data in the `data` repository. This file uses the data after features extraction so the name should be `evaluation_transformed.csv` and `train_transformed.csv`. 
+<br>
 You could select features for training by modifying `features_selected` and for normalization by modifying `features_need_scaled` in the 1st part of code. 
 You could choose model's parameters (`n_estimators` and `max_depth`) in the first part of code. 
 The prediction on `evaluation_transformed.csv` will be writed into `prediction` repository, whose file name could be personalized in the last cell. After running all the cells, you will: get the mean MAE score of cross validation (2nd part of code) and get the prediction result on `evaluation_transformed.csv`. This guide works also for GBR, RF, RF after logarithmization, GBR after logarithmization, SVM-enhanced RF and RF-enhanced SVM. 
